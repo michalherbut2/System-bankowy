@@ -13,8 +13,8 @@ public class ClientPresenter {
 	 */
 	public int getBalance(Account account) {
 
-
-		return account.getBalance();
+		return DAO.fetchAccountBalance(account);
+//		return account.getBalance();
 
 //		throw new UnsupportedOperationException();
 	}
