@@ -11,6 +11,8 @@ public class ClientServiceFacade implements PresenterFunc {
 
 	@Override
 	public void createStandingOrder(String[] data) {
+		//StandingOrder order = new StandingOrder();
+
 
 	}
 
