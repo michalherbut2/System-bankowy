@@ -38,12 +38,15 @@ public class InputData {
 		System.out.print("Podaj datę rozpoczęcia (format: YYYY-MM-DD): ");
 		String startDate = scanner.nextLine();
 
+		System.out.print("Podaj datę zakonczenia (format: YYYY-MM-DD): ");
+		String endDate = scanner.nextLine();
+
 		System.out.print("Podaj czy pierwszy przelew ma być w momencie założenia zlecenia: (tak/nie)");
 		String transaction = scanner.nextLine();
 
 
 		// Zwrócenie danych w formie tablicy
-		return new String[] { recipient, accountNumber, amount, frequency, startDate, transaction};
+		return new String[] { recipient, accountNumber, amount, frequency, startDate, endDate, transaction};
 
 //		throw new UnsupportedOperationException();
 	}

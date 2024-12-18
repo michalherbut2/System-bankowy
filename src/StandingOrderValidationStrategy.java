@@ -10,7 +10,8 @@ public class StandingOrderValidationStrategy {
 	 */
 	public boolean validateStandingOrder(Integer amount, Date date, Integer fequency) {
 		// TODO - implement StandingOrderValidationStrategy.validateStandingOrder
-		throw new UnsupportedOperationException();
+		//throw new UnsupportedOperationException();
+		return true;
 	}
 
 }

@@ -10,15 +10,21 @@ public class StandingOrder {
 	private Date endDate;
 
 	private int frequency;
+	
+	private boolean transaction;
 
-	private StandingOrderType type;
-	public StandingOrder(int orderID, int amount, Date startDate, Date endDate, int frequency, StandingOrderType type) {
+	//private StandingOrderType type;
+	public StandingOrder(int orderID, int amount, Date startDate, Date endDate, int frequency, boolean transaction) {
 		this.orderID = orderID;
 		this.amount = amount;
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.frequency = frequency;
-		this.type = type;
+		//this.type = type;
+		this.transaction = transaction;
+	}
+
+	public StandingOrder(int orderID, String recipient, int accountNumber, int amount, int frequency, String stardDate, String endDate, boolean transaction) {
 	}
 
 	public int getOrderID() {
@@ -41,7 +47,11 @@ public class StandingOrder {
 		return frequency;
 	}
 
-	public StandingOrderType getType() {
-		return type;
+	//public StandingOrderType getType() {
+	//	return type;
+	//}
+
+	public boolean isTransaction() {
+		return transaction;
 	}
 }

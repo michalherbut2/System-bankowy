@@ -1,6 +1,7 @@
 import java.util.Scanner;
 
 public class ViewService {
+	public String[] data;
 
 	PresenterFunc clientServiceFacade = new ClientServiceFacade();
 
@@ -23,7 +24,7 @@ public class ViewService {
 					displayAccountBalance();
 					break;
 				case 2:
-					String[] data = new InputData().inputStandingOrderData();
+					data = new InputData().inputStandingOrderData();
 					clientServiceFacade.createStandingOrder(data);
 					break;
 				case 0:

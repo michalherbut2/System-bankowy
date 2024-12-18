@@ -15,9 +15,11 @@ public class DAO {
 	 * 
 	 * @param account
 	 */
-	public void saveStandingOrder(Account account) {
+	public static void saveStandingOrder(Account account, boolean transaction) {
 		// TODO - implement DAO.saveStandingOrder
-		throw new UnsupportedOperationException();
+		//throw new UnsupportedOperationException();
+		boolean transfer = ClientPresenter.checkTransaction(transaction);
+
 	}
 
 }

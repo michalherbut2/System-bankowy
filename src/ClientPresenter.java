@@ -31,11 +31,12 @@ public class ClientPresenter {
 
 	/**
 	 * 
-	 * @param data
+	 * @param transaction
 	 */
-	public boolean checkTransaction(String[] data) {
+	public static boolean checkTransaction(boolean transaction) {
 		// TODO - implement ClientPresenter.checkTransaction
-		throw new UnsupportedOperationException();
+		//throw new UnsupportedOperationException();
+		return false;
 	}
 
 }
