@@ -3,7 +3,12 @@ import java.util.Scanner;
 public class ViewService {
 	public String[] data;
 
-	PresenterFunc clientServiceFacade = new ClientServiceFacade();
+	public ViewService(PresenterFunc clientServiceFacade) {
+		this.clientServiceFacade = clientServiceFacade;
+	}
+
+	private PresenterFunc clientServiceFacade;  // Zależność
+
 
 
 	public void showMenu() {
@@ -40,12 +45,12 @@ public class ViewService {
 
 		scanner.close();
 
-		throw new UnsupportedOperationException();
+//		throw new UnsupportedOperationException();
 	}
 
 	public void displayAccountBalance() {
 
-		int balance = clientServiceFacade.getBalance();
+		int balance = clientServiceFacade.getBalance(123);
 
 		System.out.println(balance);
 

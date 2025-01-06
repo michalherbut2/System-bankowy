@@ -1,11 +1,15 @@
 import java.util.Date;
 
 public class ClientServiceFacade implements PresenterFunc {
+	public ClientServiceFacade(ClientPresenter clientPresenter) {
+		this.clientPresenter = clientPresenter;
+	}
 
-	public int getBalance() {
+	ClientPresenter clientPresenter;
+	public int getBalance(int id) {
 
-		ClientPresenter clientPresenter = new ClientPresenter();
-		Account account = new Account();
+//		Account account = new Account();
+		Account account = clientPresenter.getAccount(id);
 		return clientPresenter.getBalance(account);
 
 //		throw new UnsupportedOperationException();
@@ -21,12 +25,14 @@ public class ClientServiceFacade implements PresenterFunc {
 		String endDate = data[5];
 		boolean transaction = Boolean.parseBoolean(data[6]);
 
-		Account account = null;
+		Account account = clientPresenter.getAccount(123);
 
 
 
 		StandingOrder order = new StandingOrder(0, recipient, accountNumber, amount, frequency, stardDate, endDate, transaction);
-		DAO.saveStandingOrder(account, transaction);
+		DAO.saveStandingOrder(account, order);
+		ClientPresenter.checkTransaction(recipient, accountNumber, amount, frequency, stardDate, endDate);
+
 	}
 
 	/**

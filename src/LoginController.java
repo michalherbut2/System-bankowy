@@ -8,17 +8,18 @@ public class LoginController {
 	 * @param password
 	 */
 	public Client validateLogin(String login, String password) {
-		// TODO - implement LoginController.validateLogin
-		throw new UnsupportedOperationException();
+		return DAO.authenticateClient(login, password);
+
 	}
 
-	/**
-	 * 
-	 * @param client
-	 */
-	public void login(Client client) {
-		// TODO - implement LoginController.login
-		throw new UnsupportedOperationException();
+	public void login(String login, String password, ClientPresenter clientPresenter) {
+		try {
+			Client client = validateLogin(login, password);
+			clientPresenter.setClient(client);
+			System.out.println("Zalogowano pomyślnie!");
+		} catch (IllegalArgumentException e) {
+			System.out.println("Błąd logowania: " + e.getMessage());
+		}
 	}
 
 	public int countFailedLogins() {

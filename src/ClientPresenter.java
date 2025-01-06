@@ -3,7 +3,15 @@
 
 public class ClientPresenter {
 
-	private Client[] clients;
+	public Client getClient() {
+		return client;
+	}
+
+	public void setClient(Client client) {
+		this.client = client;
+	}
+
+	private Client client;
 	private Subscriber[] subscribers;
 	private AccountFactory factory;
 
@@ -21,7 +29,8 @@ public class ClientPresenter {
 
 	public Account getAccount(int accountNumber) {
 		// TODO - implement ClientPresenter.getBalance
-		throw new UnsupportedOperationException();
+		return client.getAccounts().stream().filter(account -> account.getAccountNumber()==accountNumber).findFirst().orElseThrow(()->new IllegalArgumentException("zły numer konta"))	;
+//		throw new UnsupportedOperationException();
 	}
 
 	public void updateAccountBalance() {
@@ -30,10 +39,14 @@ public class ClientPresenter {
 	}
 
 	/**
-	 * 
-	 * @param transaction
+	 * @param recipient
+	 * @param accountNumber
+	 * @param amount
+	 * @param frequency
+	 * @param stardDate
+	 * @param endDate
 	 */
-	public static boolean checkTransaction(boolean transaction) {
+	public static boolean checkTransaction(String recipient, int accountNumber, int amount, int frequency, String stardDate, String endDate) {
 		// TODO - implement ClientPresenter.checkTransaction
 		//throw new UnsupportedOperationException();
 		return false;

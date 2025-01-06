@@ -7,8 +7,7 @@ public class ActivityLogger {
 	 * @param dataLog
 	 */
 	public void log(String dataLog) {
-		// TODO - implement ActivityLogger.log
-		throw new UnsupportedOperationException();
+		DAO.log(dataLog);
 	}
 
 	/**

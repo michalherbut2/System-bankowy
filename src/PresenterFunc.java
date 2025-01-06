@@ -1,6 +1,6 @@
 public interface PresenterFunc {
 
-	int getBalance();
+	int getBalance(int i);
 
 	/**
 	 * 

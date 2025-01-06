@@ -1,20 +1,39 @@
 //import Model.*;
 
+import java.util.List;
+
 public class Client implements ModelFunc {
+	public Client(String email, String password_hash, List<Account> accounts) {
+		this.email = email;
+		this.password_hash = password_hash;
+		this.accounts = accounts;
+	}
 
 	private static Client instance;
 	private int clientID;
+
+	public String getPassword_hash() {
+		return password_hash;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
 	private String firstname;
 	private String lastname;
 	private String password_hash;
 	private int phoneNumber;
 	private String email;
-	private Account[] accounts;
+	private List<Account> accounts;
 
 	private Client() {
 		// TODO - implement Client.Client
 		throw new UnsupportedOperationException();
 	}
+//	public Client(int id, String name, String pass, List<Account> accounts) {
+//
+//	}
 
 	public static Client getInstance() {
 		if (instance == null) {
@@ -57,4 +76,7 @@ public class Client implements ModelFunc {
 		throw new UnsupportedOperationException();
 	}
 
+    public List<Account> getAccounts() {
+        return accounts;
+    }
 }
