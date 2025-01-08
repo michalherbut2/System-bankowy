@@ -26,32 +26,26 @@ public class TransferController {
 	 * @param transferData
 	 */
 	public void initiateTransfer(String[] transferData, Account senderAccount) {
-		if (transferData.length < 2) {
-			throw new IllegalArgumentException("Dane przelewu są niepełne.");
-		}
 
-		int recipientAccountId = Integer.parseInt(transferData[0]);
-		int amount = Integer.parseInt(transferData[1]);
-		String title = transferData.length > 2 ? transferData[2] : "Przelew";
+		int recipientAccountId = Integer.parseInt(transferData[1]);
+		int amount = Integer.parseInt(transferData[2]);
 
 		// Znajdź konto odbiorcy
-		Account recipientAccount = DAO.findAccountById(recipientAccountId);
+		Account recipientAccount = DAO.fetchAccountById(recipientAccountId);
 
-        {
+		// Sprawdź środki
+		if (checkBalance(amount, senderAccount)) {
+			// Wykonaj przelew
+			senderAccount.decreaseBalance(amount);
+			recipientAccount.increaseBalance(amount);
 
-            // Sprawdź środki
-            if (checkBalance(amount, senderAccount)) {
-                // Wykonaj przelew
-                senderAccount.decreaseBalance(amount);
-                recipientAccount.increaseBalance(amount);
+			// Zaloguj przelew
+			logger.log(String.format("Przelew: %s -> %s, kwota: %d, tytuł: %s",
+					senderAccount.getAccountNumber(), recipientAccount.getAccountNumber(), amount));
 
-                // Zaloguj przelew
-                logger.log(String.format("Przelew: %s -> %s, kwota: %d, tytuł: %s",
-                        senderAccount.getAccountNumber(), recipientAccount.getAccountNumber(), amount, title));
+			System.out.println("Przelew wykonany pomyślnie.");
+		}
 
-                System.out.println("Przelew wykonany pomyślnie.");
-            }
-        }
 	}
 
 	/**
@@ -59,8 +53,7 @@ public class TransferController {
 	 * @param account
 	 */
 	public void sendTransferConfirmation(Account account) {
-		// TODO - implement TransferController.sendTransferConfirmation
-		throw new UnsupportedOperationException();
+		System.out.println("Przelew przesłay poprawnie!");
 	}
 
 }

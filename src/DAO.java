@@ -58,7 +58,7 @@ public class DAO {
 		}
 	}
 
-	public static Account findAccountById(int AccountId) {
+	public static Account fetchAccountById(int AccountId) {
 		for (Client client : DATABASE) {
 			for (Account account1 : client.getAccounts()) {
 				if (account1.getAccountNumber() == AccountId) {

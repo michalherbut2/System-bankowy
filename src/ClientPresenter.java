@@ -1,6 +1,10 @@
 //import Model.*;
 //import Presenter.*;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 public class ClientPresenter {
 
 	public Client getClient() {
@@ -22,15 +26,10 @@ public class ClientPresenter {
 	public int getBalance(Account account) {
 
 		return DAO.fetchAccountBalance(account);
-//		return account.getBalance();
-
-//		throw new UnsupportedOperationException();
 	}
 
 	public Account getAccount(int accountNumber) {
-		// TODO - implement ClientPresenter.getBalance
-		return client.getAccounts().stream().filter(account -> account.getAccountNumber()==accountNumber).findFirst().orElseThrow(()->new IllegalArgumentException("zły numer konta"))	;
-//		throw new UnsupportedOperationException();
+		return client.getAccounts().stream().filter(account -> account.getAccountNumber() == accountNumber).findFirst().orElseThrow(()->new IllegalArgumentException("zły numer konta"));
 	}
 
 	public void updateAccountBalance() {
@@ -43,13 +42,56 @@ public class ClientPresenter {
 	 * @param accountNumber
 	 * @param amount
 	 * @param frequency
-	 * @param stardDate
+	 * @param startDate
 	 * @param endDate
 	 */
-	public static boolean checkTransaction(String recipient, int accountNumber, int amount, int frequency, String stardDate, String endDate) {
-		// TODO - implement ClientPresenter.checkTransaction
-		//throw new UnsupportedOperationException();
-		return false;
+	public static boolean validateTransaction(String recipient, int accountNumber, int amount, int frequency, String startDate, String endDate) {
+		// 1. Sprawdzenie odbiorcy
+		if (recipient == null || recipient.isBlank()) {
+			System.out.println("Recipient is invalid.");
+			return false;
+		}
+
+		// 2. Sprawdzenie, czy konto istnieje
+		Account account = DAO.fetchAccountById(accountNumber);
+		if (account == null) {
+			System.out.println("Account not found.");
+			return false;
+		}
+
+		// 3. Sprawdzenie salda i kwoty
+		if (amount <= 0) {
+			System.out.println("Amount must be greater than zero.");
+			return false;
+		}
+		if (account.getBalance() < amount) {
+			System.out.println("Insufficient funds.");
+			return false;
+		}
+
+		// 4. Sprawdzenie częstotliwości
+		if (frequency <= 0) {
+			System.out.println("Frequency must be positive.");
+			return false;
+		}
+
+		// 5. Sprawdzenie dat
+		try {
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+			LocalDate start = LocalDate.parse(startDate, formatter);
+			LocalDate end = LocalDate.parse(endDate, formatter);
+
+			if (end.isBefore(start)) {
+				System.out.println("End date must be after start date.");
+				return false;
+			}
+		} catch (DateTimeParseException e) {
+			System.out.println("Invalid date format. Use yyyy-MM-dd.");
+			return false;
+		}
+
+		// Wszystkie warunki spełnione
+		return true;
 	}
 
 }
