@@ -5,6 +5,17 @@ import java.util.Date;
 public class StandingOrder {
 
 	private int orderID;
+
+	public String getRecipient() {
+		return recipient;
+	}
+
+	public int getAccountNumber() {
+		return accountNumber;
+	}
+
+	private String recipient;
+	private int accountNumber;
 	private int amount;
 	private Date startDate;
 	private Date endDate;
@@ -13,18 +24,15 @@ public class StandingOrder {
 	
 	private boolean transaction;
 
-	//private StandingOrderType type;
-	public StandingOrder(int orderID, int amount, Date startDate, Date endDate, int frequency, boolean transaction) {
+	public StandingOrder(int orderID, String recipient, int accountNumber, int amount, int frequency, Date startDate, Date endDate, boolean transaction) {
 		this.orderID = orderID;
+		this.recipient = recipient;
+		this.accountNumber = accountNumber;
 		this.amount = amount;
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.frequency = frequency;
-		//this.type = type;
 		this.transaction = transaction;
-	}
-
-	public StandingOrder(int orderID, String recipient, int accountNumber, int amount, int frequency, String stardDate, String endDate, boolean transaction) {
 	}
 
 	public int getOrderID() {
@@ -46,10 +54,6 @@ public class StandingOrder {
 	public int getFrequency() {
 		return frequency;
 	}
-
-	//public StandingOrderType getType() {
-	//	return type;
-	//}
 
 	public boolean isTransaction() {
 		return transaction;

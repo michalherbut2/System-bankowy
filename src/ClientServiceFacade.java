@@ -1,3 +1,7 @@
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class ClientServiceFacade implements PresenterFunc {
 	public ClientServiceFacade(ClientPresenter clientPresenter, TransferController transferController) {
 		this.clientPresenter = clientPresenter;
@@ -18,13 +22,26 @@ public class ClientServiceFacade implements PresenterFunc {
 	@Override
 	public void createStandingOrder(String[] data) {
 
+		// Utwórz instancję SimpleDateFormat z odpowiednim formatem
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+//		// Przekształć String na Date
+//		Date date = sdf.parse(dateString);
+
 		String recipient = data[0];
 		int accountNumber = Integer.parseInt(data[1]);
 		int amount = Integer.parseInt(data[2]);
 		int frequency = Integer.parseInt(data[3]);
-		String startDate = data[4];
-		String endDate = data[5];
-		boolean transaction = Boolean.parseBoolean(data[6]);
+		Date startDate;
+		Date endDate;
+		try {
+			startDate = sdf.parse(data[4]);
+			endDate = sdf.parse(data[5]);
+
+		} catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+        boolean transaction = Boolean.parseBoolean(data[6]);
 
 		Account account = clientPresenter.getAccount(123);
 
